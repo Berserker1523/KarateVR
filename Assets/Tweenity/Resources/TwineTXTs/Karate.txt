@@ -1,0 +1,20 @@
+:: StoryTitle
+Karate
+
+:: UserScript[script]
+
+
+:: UserStylesheet[stylesheet]
+
+
+:: BotonInicio.oprimir(): Escoger técnica a practicar[START]
+El usuario al entrar a la aplciacion ve un menu con las tecnicas disponibles: A, B, C.
+@
+[[Tate tsuki]]
+[[Ura tsuki]]
+{
+}
+<
+Simulator.InicializarConstantes("TweenityInstructions")
+Simulator.OpenDialogueViewer()
+>

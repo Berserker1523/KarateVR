@@ -1,0 +1,139 @@
+:: StoryTitle
+TutorialUsoTweenity
+
+:: UserScript[script]
+
+
+:: UserStylesheet[stylesheet]
+
+
+:: Recibir instrucción inicial - Nodo sin acciones de usuario, sólo acciones de simulador[START]
+Este es un audio de ejemplo, en el nodo actual sólo hay acciones de simulador y una de ellas es la ejecución de este audio, esto puede ser muy util para dar instrucciones en tus entornos virtuales.
+@
+[[Ver un ejemplo de diálogo]]
+{}
+<
+Simulator.InicializarConstantes("TweenityInstructions")
+Simulator.Wait(2)
+Simulator.Play("InstruccionInicial")
+Simulator.OpenDialogueViewer()
+>
+
+:: Ver un ejemplo de diálogo[dialogue]
+En tus simuladores/aplicaciones es posible que necesites poner diálogos y capturas una de varias posibles respuestas de tu usuario. 
+@
+Este es un ejemplo de diálogo con varias posibles respuestas de usuario. 
+¿Puedes contarme qué color te prefieres entre rojo, verde y azul?
+[[Prefiero el color rojo]]
+[[Prefiero el color verde]]
+[[Prefiero el color azul]]
+{}
+<>
+
+:: Ejemplo selección random[random reminder]
+Al oprimir se selecciona una de 3 opciones (aleatoriamente)
+@
+[[1:Mostrar partículas amarillas]]
+[[2:Mostrar partículas rosadas]]
+[[3:Mostrar partículas moradas]]
+{
+Simulator.ShowReminder(1; BtnTutorial)
+BtnTutorial.Touched()
+}
+<>
+
+:: Prefiero el color rojo
+Al seleccionar el rojo se muestra un botón rojo
+@
+[[Ejemplo selección random]]
+{}
+<
+Simulator.CloseDialogueViewer()
+BtnsManager.ShowButton("button1";true)
+BtnTutorial.ChangeBtnColor(red)
+>
+
+:: Prefiero el color verde
+Al seleccionar el verde se muestra un botón verde
+@
+[[Ejemplo selección random]]
+{}
+<
+Simulator.CloseDialogueViewer()
+BtnsManager.ShowButton("button1";true)
+BtnTutorial.ChangeBtnColor(green)
+>
+
+:: Prefiero el color azul
+Al seleccionar el azul se muestra un botón azul
+@
+[[Oprimir el botón azul - Ejemplo selección múltiple]]
+{}
+<
+Simulator.CloseDialogueViewer()
+BtnsManager.ShowButton("button1";true)
+BtnTutorial.ChangeBtnColor(blue)
+BtnsManager.ShowButton("button2";true)
+BtnTutorial2.ChangeBtnColor(red)
+>
+
+:: Oprimir el botón azul - Ejemplo selección múltiple[multipleChoice]
+Al oprimir se selecciona una de 2 opciones (aleatoriamente)
+@
+[[BtnTutorial.Touched():Mostrar partículas de color azul]]
+[[BtnTutorial2.Touched():Mostrar partículas de color rojo]]
+{
+BtnTutorial.Touched()
+BtnTutorial2.Touched()
+}
+<>
+
+:: 1:Mostrar partículas amarillas[END]
+Fin
+@
+[[X]]
+{}
+<
+Particles.ChangeParticleColor(yellow)
+>
+
+:: 2:Mostrar partículas rosadas[END]
+Fin
+@
+[[X]]
+{}
+<
+Particles.ChangeParticleColor(pink)
+>
+
+
+:: 3:Mostrar partículas moradas[END]
+Fin
+@
+[[X]]
+{}
+<
+Particles.ChangeParticleColor(purple)
+>
+
+:: BtnTutorial.Touched():Mostrar partículas de color azul[END]
+Fin
+@
+[[X]]
+{}
+<
+BtnsManager.ShowButton("button1";false)
+BtnsManager.ShowButton("button2";false)
+Particles.ChangeParticleColor(blue)
+>
+
+:: BtnTutorial2.Touched():Mostrar partículas de color rojo[END]
+Fin
+@
+[[X]]
+{}
+<
+BtnsManager.ShowButton("button1";false)
+BtnsManager.ShowButton("button2";false)
+Particles.ChangeParticleColor(red)
+>
