@@ -1,51 +1,49 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class PositionChanger : MonoBehaviour
 {
     [SerializeField] private List<Position> positions;
-    private int currentPosition;
 
-    private void Start()
+    private int currentPosition = -1;
+
+    /*private void Start()
     {
         currentPosition = 0;
         Debug.Log($"currentPosition: {currentPosition}");
-        for (int i = 1; i < positions.Count; i++)
-        {
-            positions[i].positionLeft.transform.parent.gameObject.SetActive(false);
-            positions[i].positionRight.transform.parent.gameObject.SetActive(false);
-            positions[i].positionLeft.GetComponentInChildren<HandTrigger>().ChangeColor(false);
-            positions[i].positionRight.GetComponentInChildren<HandTrigger>().ChangeColor(false);
-        }
+        for (int i = 0; i < positions.Count; i++)
+            positions[i].ChangeActive(i == currentPosition);
     }
 
     private void Update()
     {
-        if(positions[currentPosition].positionLeft.GetComponentInChildren<HandTrigger>().IsGreen && positions[currentPosition].positionRight.GetComponentInChildren<HandTrigger>().IsGreen)
+        if(positions[currentPosition].IsWellDone())
         {
-            positions[currentPosition].positionLeft.GetComponentInChildren<HandTrigger>().ChangeColor(false);
-            positions[currentPosition].positionRight.GetComponentInChildren<HandTrigger>().ChangeColor(false);
-            positions[currentPosition].positionLeft.transform.parent.gameObject.SetActive(false);
-            positions[currentPosition].positionRight.transform.parent.gameObject.SetActive(false);
+            positions[currentPosition].ChangeActive(false);
 
             currentPosition = (currentPosition + 1) % positions.Count;
+            //first position does not enter into the loop
+            if (currentPosition == 0)
+                currentPosition = 1;
             Debug.Log($"currentPosition: {currentPosition}");
 
-            positions[currentPosition].positionLeft.transform.parent.gameObject.SetActive(true);
-            positions[currentPosition].positionRight.transform.parent.gameObject.SetActive(true);
-            positions[currentPosition].positionLeft.GetComponentInChildren<HandTrigger>().ChangeColor(false);
-            positions[currentPosition].positionRight.GetComponentInChildren<HandTrigger>().ChangeColor(false);
+            positions[currentPosition].ChangeActive(true);
         }
-    }
+    }*/
 
-    [Serializable]
-    private class Position
+    private void Update()
     {
-        public GameObject positionLeft;
-        public GameObject positionRight;
+        if (currentPosition != -1)
+            positions[currentPosition].IsWellDone();
     }
 
-
+    public void ShowPosition(string position)
+    {
+        Debug.Log($"llegue ShowPosition {position}");
+        int positionInt = int.Parse(position);
+        if(currentPosition != -1)
+            positions[currentPosition].ChangeActive(false);
+        positions[positionInt].ChangeActive(true);
+        currentPosition = positionInt;
+    }
 }

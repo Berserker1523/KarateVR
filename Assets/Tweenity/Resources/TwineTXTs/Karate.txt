@@ -7,14 +7,234 @@ Karate
 :: UserStylesheet[stylesheet]
 
 
-:: BotonInicio.oprimir(): Escoger técnica a practicar[START]
-El usuario al entrar a la aplciacion ve un menu con las tecnicas disponibles: A, B, C.
+:: Recibir instrucción inicial - Nodo sin acciones de usuario, sólo acciones de simulador[START]
+Test
 @
+[[Escoger técnica a practicar]]
+{}
+<
+Simulator.OpenDialogueViewer()
+>
+
+:: Escoger técnica a practicar[dialogue]
+El usuario al entrar a la aplcación ve un menu con las tecnicas disponibles: Tate tsuki y Ura tsuki.
+@
+Elige la técnica de puño que quieres aprender
 [[Tate tsuki]]
 [[Ura tsuki]]
 {
 }
+<>
+
+:: Tate tsuki
+Para empezar se te mostrara una explicacón paso a paso de la técnica para que la puedas realizar más adelante.
+Se reproduce un audio dando las primeras instrucciones:
+"Haz elegido prácticar el puño Tate Tsuki, para empezar revisa el vídeo a continuación para familiarizarte con el puño"
+Se reproduce el video:
+<iframe width="1246" height="701" src="https://www.youtube.com/embed/nSQ2n6drJHU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+El usuario al terminar el video le da en 'ok'
+@
+[[Elegir si repetir video Tate Suki o continuar con la práctica]]
+{
+}
 <
-Simulator.InicializarConstantes("TweenityInstructions")
+Simulator.Play("AudioinstruccionesTatetsuki")
+>
+
+:: Ura tsuki
+Para empezar se te mostrara una explicacón paso a paso de la técnica para que la puedas realizar más adelante.
+Se reproduce un audio dando las primeras instrucciones:
+"Haz elegido prácticar el puño Ura Tsuki, para empezar revisa el vídeo a continuación para familiarizarte con el puño"
+Se reproduce el video:
+<iframe width="1246" height="701" src="https://www.youtube.com/embed/_ee5ZgLKLbI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@
+[[Elegir si repetir video Ura tsuki o continuar con la práctica]]
+{
+}
+<
+Simulator.Play("AudioinstruccionesUratsuki")
+VideoCtrl.Play("Ura tsuki")
+>
+
+:: Posición 1 - Ura tsuki[reminder]
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se moveran los indicadores al siguiente paso y se le muestra la posición 2. De lo contrario se repite la posición 1
+<img src="https://i.imgur.com/B1aOa5N.jpeg" alt="Pos1 ura tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[Posición 2 - Ura tsuki]] 
+{
+Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
+Indicadores.EstanEnVerde()
+}
+<>
+
+:: Posición 2 - Ura tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 1 a la 2. Una vez logrado, se le permite pasar a la posición 3. De lo contrario se repite la posición 2
+<img src="https://i.imgur.com/uxB6jpj.jpeg" alt="Pos2 ura tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[Posición 3-Ura tsuki]]
+{
+Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
+Indicadores.EstanEnVerde()
+}
+<>
+
+:: Posición 3-Ura tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/lGgbAkD.jpeg" alt="Pos3 ura tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[Escoger técnica a practicar]] 
+{
+Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
+Indicadores.EstanEnVerde()
+}
+<>
+
+:: 1.EstanEnVerde1():Posición 2 - Tate tsuki
+Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Esto se hará por medio de unos indicadores visuales que le muestren al usuario donde colocar la mano y en que rotación. Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 1 a la 2. Una vez logrado, se le permite pasar a la posición 3
+<img src="https://i.imgur.com/bcFQBUF.jpeg" alt="Pos2 tate tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[2.EstanEnVerde2():Posición 3 - Tate tsuki]] 
+{
+2.EstanEnVerde2()
+}
+<
+2.Log()
+TateTsukiManager.ShowPosition("2")
+>
+
+:: Posición 1 - Tate tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se moveran los indicadores al siguiente paso y se le muestra la posición 2
+<img src="https://i.imgur.com/3OZVteZ.jpeg" alt="Pos1 tate tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[1.EstanEnVerde1():Posición 2 - Tate tsuki]] 
+{
+1.EstanEnVerde1()
+}
+<
+1.Log()
+TateTsukiManager.ShowPosition("1")
+>
+
+:: Posición 5 - Tate tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para terminar tu entrenamiento, ambos indicadores deben estár en verde"
+@
+[[Escoger técnica a practicar]] 
+{
+5.EstanEnVerde5()
+}
+<
+5.Log()
+>
+
+:: Posición 4 - Tate tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para terminar tu entrenamiento, ambos indicadores deben estár en verde"
+@
+[[Posición 5 - Tate tsuki]] 
+{
+4.EstanEnVerde4()
+}
+<
+4.Log()
+TateTsukiManager.ShowPosition("4")
+>
+
+:: 2.EstanEnVerde2():Posición 3 - Tate tsuki
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para terminar tu entrenamiento, ambos indicadores deben estár en verde"
+@
+[[Posición 4 - Tate tsuki]] 
+{
+3.EstanEnVerde3()
+}
+<
+3.Log()
+TateTsukiManager.ShowPosition("3")
+>
+
+:: Elegir si repetir video Ura tsuki o continuar con la práctica[dialogue]
+El usuario elegira entre las dos opciones posibles: ver el vídeo de nuevo, o seguir a la parte práctica.
+@
+¿Deseas ver el vídeo de nuevo? o ¿Deseas seguir a la parte práctica?
+Recuerda que no es necesario que recuerdes de memoria todo lo que dice el video para tu parte práctica, pues esta es guiada y te va a recordar todo lo que necesitas saber de manera puntual.
+[[Ver el vídeo de nuevo Ura tsuki]]
+[[Empezar la práctica Ura tsuki]]
+{}
+<>
+
+:: Ver el vídeo de nuevo Ura tsuki
+Se reproduce el vídeo de nuevo.
+@
+[[Elegir si repetir video Ura tsuki o continuar con la práctica]]
+{}
+<
+VideoCtrl.Play("Ura tsuki")
+>
+
+:: Empezar la práctica Ura tsuki
+Se pasa a la parte práctica.
+Se reproduce el audio con las instrucciones del inicio del entrenamiento:
+"En este entrenamiento te iremos mostrando indicadores que te dejarán ver en qué posicion y rotación deben poner tu mano, cuando esté de manera correcta este cambiará a color verde, de lo contrario permanecerá amarillo. Recuerda que para pasar al siguiente movimiento los indicadores de ambas manos deben estar en color verde."
+Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Esto se hará por medio de unos indicadores visuales que le muestren al usuario donde colocar la mano y en qué rotación.
+@
+[[Posición 1 - Ura tsuki]]
+{}
+<
+Simulador.Play("Iniciodeentrenamiento")
+CtrlIndicadoresManos.EmpezarEntrenamiento("Ura tsuki")
+>
+
+:: Elegir si repetir video Tate Suki o continuar con la práctica[dialogue]
+El usuario elegira entre las dos opciones posibles: ver el vídeo de nuevo, o seguir a la parte práctica.
+@
+¿Deseas ver el vídeo de nuevo? o ¿Deseas seguir a la parte práctica?
+Recuerda que no es necesario que recuerdes de memoria todo lo que dice el video para tu parte práctica, pues esta es guiada y te va a recordar todo lo que necesitas saber de manera puntual.
+[[Ver el vídeo de nuevo Tate tsuki]]
+[[Empezar la práctica Tate tsuki]]
+{}
+<
 Simulator.OpenDialogueViewer()
+>
+
+:: Ver el vídeo de nuevo Tate tsuki
+Se reproduce el vídeo de nuevo.
+@
+[[Elegir si repetir video Tate Suki o continuar con la práctica]]
+{}
+<
+
+>
+
+:: Empezar la práctica Tate tsuki
+Se pasa a la parte práctica.
+Se reproduce el audio con las instrucciones del inicio del entrenamiento:
+"En este entrenamiento te iremos mostrando indicadores que te dejarán ver en qué posicion y rotación deben poner tu mano, cuando este de manera correcta este cambiará a color verde, de lo contrario permanecerá amarilla. Recuerda que para pasar al siguiente paso los indicadores de ambas manos deben estar en color verde."
+Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Esto se hará por medio de unos indicadores visuales que le muestren al usuario donde colocar la mano y en qué rotación.
+@
+[[Posición 1 - Tate tsuki]]
+{}
+<
+CtrlIndicadoresManos.EmpezarEntrenamiento("TateTsuki")
+TateTsukiManager.ShowPosition("0")
 >

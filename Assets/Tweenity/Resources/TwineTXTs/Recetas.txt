@@ -1,0 +1,245 @@
+:: StoryTitle
+Grafo de simulación Recetas
+
+:: UserScript[script]
+
+
+:: UserStylesheet[stylesheet]
+
+
+:: Recibir la bienvenida[START dialogue]
+Se le da la bienvenida al usuario mediante un corto texto. Se le informa que puede esperar de la experiencia y que se espera de el.
+@
+¡Bienvenido! Aprenderemos a cocinar diferentes recetas, saca tu chef interior y preparate para dominar la cocina.
+[[Ver Lista de Recetas]]
+{
+BtnSiguiente.Touched()
+}
+<
+GameController.displayRecetas()
+>
+
+:: Ver Lista de Recetas[multipleChoice]
+Se le presenta al usuario la lista de recetas. Se espera que el usuario seleccione una de las recetas para continuar la experiencia.
+@
+[[BtnRecetaHamburguesa.Touched():Receta Hamburguesa]]
+[[BtnRecetaPizza.Touched():Receta Pizza]]
+[[BtnRecetaTernera.Touched():Receta Ternera Picante]]
+{
+BtnRecetaHamburguesa.Touched()
+BtnRecetaPizza.Touched()
+BtnRecetaTernera.Touched()
+}
+<
+>
+
+:: BtnRecetaHamburguesa.Touched():Receta Hamburguesa
+Se le muestra al usuario un texto con la lista de ingredientes y se le presentan estos. Se le da un boton empezar para iniciar la receta.
+@
+[[Agregar aceite a la sarten]]
+{
+btnEmpezar.Touched()	
+}
+<
+GameController.CargarEscena("Hamburguesa")
+GameController.UpdateTxtPasos("1")
+>
+
+:: BtnRecetaPizza.Touched():Receta Pizza
+Se le muestra al usuario un texto con la lista de ingredientes y se le presentan estos. Se le da un boton empezar para iniciar la receta.
+@
+[[Aplanar masa]]
+{
+btnEmpezar.Touched()
+}
+<
+GameController.CargarEscena("Pizza")
+GameController.UpdateTxtPasos("1")
+>
+
+:: BtnRecetaTernera.Touched():Receta Ternera Picante
+Se le muestra al usuario un texto con la lista de ingredientes y se le presentan estos. Se le da un boton empezar para iniciar la receta.
+@
+[[Agregar aceite a la sarten Ternera]]
+{
+btnEmpezar.touched()
+}
+<
+GameController.CargarEscena("Ternera")
+GameController.UpdateTxtPasos("1")
+>
+
+:: Agregar aceite a la sarten[reminder]
+Se le pide al usuario que agregue aceite a la sarten. La experiencia no continua hasta que no haya agregado el aceite.
+@
+[[Agregar carne a la sarten]]
+{
+Simulator.ShowReminder(10;"Sarten")
+Sarten.AgregoAceite()
+}
+<
+GameController.UpdateTxtPasos("2")
+>
+
+
+:: Aplanar masa
+Se le pide al usuario que aplane la masa con el rodillo. La experiencia no continua hasta que no haya aplanado la masa.
+@
+[[Cortar ingredientes]]
+{
+Simulator.ShowReminder(10;"rodillo")
+Masa.AplanoMasa()
+}
+<
+GameController.UpdateTxtPasos("2")
+>
+
+
+:: Agregar aceite a la sarten Ternera[reminder]
+Se le pide al usuario que agregue aceite a la sarten. La experiencia no continua hasta que no haya agregado el aceite.
+@
+[[Cortar verduras ternera]]
+{
+Simulator.ShowReminder(10;"Aceite")
+Sarten.AgregoAceite()
+}
+<
+GameController.UpdateTxtPasos("2")
+>
+
+
+:: Agregar carne a la sarten[reminder]
+Se le pide al usuario que agregue la carne a la sarten. La experiencia no continua hasta que no haya agregado la carne.
+@
+[[Cortar verduras]]
+{
+Simulator.ShowReminder(10;"carne")
+Sarten.AgregoCarne()
+}
+<
+GameController.UpdateTxtPasos("3")
+>
+
+:: Cortar verduras[reminder]
+Se le pide al usuario que corte la lechuga, el tomate y la cebolla. La experiencia no continua hasta que no haya cortado los 3 ingredientes.
+@
+[[Construir Hamburguesa]]
+{
+Simulator.ShowReminder(10;"cuchillo")
+Cuchillo.CortoVerdurasHamburguesa()
+}
+<
+GameController.UpdateTxtPasos("4")
+>
+
+:: Construir Hamburguesa[reminder]
+Se le pide al usuario que construya la hamburguesa juntando todos los ingredientes que ha preparado en los pasos anteriores.
+@
+[[Fin]]
+{
+Simulator.ShowReminder(10;"plato")
+Plato.AgregoIngredientesHamburguesa()
+}
+<
+GameController.UpdateTxtPasos("Fin")
+>
+
+:: Fin[END dialogue]
+Se le felicita al usuario por haber completado la receta. Se le presenta un el plato terminado y un boton que le permita volver al menu inicial.
+@
+[[Ver Lista de Recetas]]
+{
+btnVolerMenu.Touched()
+}
+<
+ParticlesCelebracion.Play()
+GameController.CargarEscena("nombreEscena")
+>
+
+:: Cortar ingredientes[reminder]
+Se le pide al usuario que corte la salchica, el salami y que raye el queso. La experiencia no continua hasta que no haya cortado los 3 ingredientes.
+@
+[[Construir Pizza]]
+{
+Simulator.ShowReminder(10;"cuchillo")
+Cuchillo.CortoIngredientesPizza()
+}
+<
+GameController.UpdateTxtPasos("3")
+>
+
+
+:: Construir Pizza[reminder]
+Se le pide al usuario que construya la Pizza juntando todos los ingredientes que ha preparado en los pasos anteriores y la salsa.
+@
+[[Meter Pizza al horno]]
+{
+Simulator.ShowReminder(10;"Masa")
+Masa.AgregoIngredientes()
+}
+<
+GameController.UpdateTxtPasos("4")
+>
+
+:: Meter Pizza al horno[reminder]
+Se le pide al usuario que meta la pizza al horno y espere 15 segundos a que se haya cocinado. Debe presionar un boton del horno en el momento justo para detener el horno antes de que se queme la pizza.
+@
+[[Fin]]
+[[Error Cuarto paso Pizza]]
+{
+Simulator.ShowReminder(10;"Horno")
+Horno.MetioPizza()
+}
+<
+GameController.UpdateTxtPasos("Fin")
+>
+
+:: Error Cuarto paso Pizza[multipleChoice]
+Se le avisa al usuario que quemo la pizza y se le pregunta al usuario si quiere volver a empezar o servir la pizza quemada.
+@
+[[Aplanar masa]]
+[[Fin]]
+{
+btnVolverAEmpezar.Touched()
+btnServir.Touched()
+}
+<
+>
+
+:: Cortar verduras ternera[reminder]
+Se le pide al usuario que corte el ajo, los champiñones y la cebolla. La experiencia no continua hasta que no haya cortado los 3 ingredientes.
+@
+[[Agregar ingredientes a la sarten]]
+{
+Simulator.ShowReminder(10;"Cuchillo")
+Cuchillo.CortoVerdurasTernera()
+}
+<
+GameController.UpdateTxtPasos("3")
+>
+
+:: Agregar ingredientes a la sarten[reminder]
+Se le pide al usuario que agregue en el orden correcto a la sarten, la carne y los demas ingredientes.
+@
+[[Añadir especias a la sarten]]
+{
+Simulator.ShowReminder(10;"Sarten")
+Sarten.AgregoIngredientesTernera()
+}
+<
+GameController.UpdateTxtPasos("4")
+>
+
+:: Añadir especias a la sarten[reminder]
+Se le pide al usuario que añada a la mezcla en la sarten, sal, salsa soya y picante.
+@
+[[Fin]]
+{
+Simulator.ShowReminder(10;"Sarten")
+Sarten.AgregoEspecias()
+}
+<
+GameController.UpdateTxtPasos("Fin")
+>
+
+

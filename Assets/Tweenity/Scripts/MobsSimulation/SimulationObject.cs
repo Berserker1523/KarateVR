@@ -92,23 +92,23 @@ public class SimulationObject {
                 string currLineText = nodeData[i];
                 bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\r\n" );
                 int endOfFirstLine = currLineText.IndexOf( "\r\n" );
-                //Debug.Log("CUR LINE: ---" + currLineText);
+                Debug.Log("CUR LINE: ---" + currLineText);
                 // Extract Title
                 int titleStart = 0;
                 int titleEnd = tagsPresent
                     ? currLineText.IndexOf( "[" )
                     : endOfFirstLine;
                 string title = currLineText.Substring(titleStart, titleEnd).Trim();
-                //Debug.Log("BODY title  "+title);
+                Debug.Log("BODY title  "+title);
                 // Extract Tags (if any)
                 string tags = tagsPresent
                     ? currLineText.Substring( titleEnd + 1, (endOfFirstLine - titleEnd)-2)
                     : "";
-                //Debug.Log("BODY tags  "+tags);
+                Debug.Log("BODY tags  "+tags);
 
                 // Extract Responses, Message Text user and simulator actions
                 string bodyNode = currLineText.Split('@')[1].Trim();
-                //Debug.Log("BODY NODE  "+bodyNode);
+                Debug.Log("BODY NODE  "+bodyNode);
 
                 string messageAndResponses = bodyNode.Substring( 0, bodyNode.IndexOf("{") );
                 //Debug.Log("MESSAGE & RESPONSES  "+messageAndResponses);
@@ -129,20 +129,20 @@ public class SimulationObject {
 
                 // Extract Message Text
                 string message = messageAndResponses.Substring( 0, messageAndResponses.IndexOf("[[")).Trim();
-                //Debug.Log("MESSAGE  "+message); 
+                Debug.Log("MESSAGE  "+message); 
 
                 string responseText = messageAndResponses.Substring( message.Length);
-                //Debug.Log("RESPONSE  "+responseText);
+                Debug.Log("RESPONSE  "+responseText);
 
                 // Extract UserActions
                 string userActionsText = bodyNode.Substring(bodyNode.IndexOf("{")+1);
                 userActionsText = userActionsText.Substring(0,userActionsText.IndexOf("}")).Trim();
-                //Debug.Log("USER ACTIONS  "+ userActionsText);
+                Debug.Log("USER ACTIONS  "+ userActionsText);
 
                 // Extract SimulatorActions
                 string simulatorActionsText = bodyNode.Substring(bodyNode.IndexOf("<")+1);
                 simulatorActionsText = simulatorActionsText.Substring(0,simulatorActionsText.IndexOf(">")).Trim();
-                //Debug.Log("SIMULATOR ACTIONS  "+ simulatorActionsText);
+                Debug.Log("SIMULATOR ACTIONS  "+ simulatorActionsText);
 
 
                 Node curNode = new Node();

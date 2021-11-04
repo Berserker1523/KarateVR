@@ -1,4 +1,4 @@
-public enum HandTags
+public enum HandTag
 {
     HandLeft,
     HandRight
