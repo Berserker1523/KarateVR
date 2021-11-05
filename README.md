@@ -20,3 +20,14 @@ Motor de videojuego multiplataforma creado por Unity Technologies. Unity está d
 Twine es una herramienta gratuita y de código abierto creada por Chris Klimas para hacer ficción interactiva en forma de páginas web. Está disponible en Mac OS X, Windows y Linux.
 #### Oculus VR: 
 Documentación de oculus VR y unity, disponible en https://docs.unity3d.com/es/530/Manual/VRDevices-Oculus.html
+
+## Instrucciones de descarga del código para desarrollo
+
+1. Descargue o clone el repositorio
+2. Abra el código con Unity (versión 20203.11f1)
+3. Conecte su dispositivo Oculus Quest 2
+4. Configure el dispositivo con ayuda de la aplicación de Oculus para PC
+5. Haga click en play en la parte superior de Unity.
+6. Disfrute la experiencia.
+
+## Instrucciones de uso del APK.
