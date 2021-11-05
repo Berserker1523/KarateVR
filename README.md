@@ -36,3 +36,8 @@ Documentación de oculus VR y unity, disponible en https://docs.unity3d.com/es/5
 6. Disfrute la experiencia.
 
 ## Instrucciones de uso del APK.
+1. Descargue el apk en su computador
+2. Conecte su Oculus quest 2
+3. Configure el Oculus en el pc
+4. Abra el APK
+5. Disfrute la experiencia
