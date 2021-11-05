@@ -79,7 +79,7 @@ public class SimulationController : MonoBehaviour {
         print("Se esperaba el objeto "+curExpectedUserAction.object2Action+" y se recibió "+actRecibida.object2Action);
         print("Se esperaba la acción (método/función) "+curExpectedUserAction.actionName+" y se recibió "+actRecibida.actionName);
         print("Se esperaban los parámetros "+curExpectedUserAction.actionParams+" y se recibieron "+actRecibida.actionParams);
-        Debug.Log($"test curExpectedUserAction {curExpectedUserAction}");
+        //Debug.Log($"test curExpectedUserAction {curExpectedUserAction}");
         bool a = actRecibida.Equals(curExpectedUserAction);
         bool b = curNode.userActions.Contains(actRecibida);
         if (actRecibida.Equals(curExpectedUserAction) || curNode.userActions.Contains(actRecibida))

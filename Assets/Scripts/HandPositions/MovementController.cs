@@ -12,6 +12,12 @@ public class MovementController : MonoBehaviour
         movement.SetActive(true);
     }
 
+    public void TerminarEntrenamiento(string movementName)
+    {
+        GameObject movement = GetMovement(movementName);
+        movement.SetActive(false);
+    }
+
     private GameObject GetMovement(string name)
     {
         foreach(Movement movement in movements)

@@ -82,7 +82,8 @@ public class HandTrigger : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke("SetToGreen", 2);
+        ChangeStatus(false);
+        //Invoke("SetToGreen", 5);
     }
 
     private void SetToGreen()

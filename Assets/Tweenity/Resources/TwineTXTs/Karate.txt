@@ -38,6 +38,8 @@ El usuario al terminar el video le da en 'ok'
 {
 }
 <
+Simulator.CloseDialogueViewer()
+TateTsukiGIFManager.PlayGIF();
 Simulator.Play("AudioinstruccionesTatetsuki")
 >
 
@@ -96,14 +98,15 @@ Indicadores.EstanEnVerde()
 }
 <>
 
-:: 1.EstanEnVerde1():Posición 2 - Tate tsuki
+:: Posición 2 - Tate tsuki[reminder]
 Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Esto se hará por medio de unos indicadores visuales que le muestren al usuario donde colocar la mano y en que rotación. Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 1 a la 2. Una vez logrado, se le permite pasar a la posición 3
 <img src="https://i.imgur.com/bcFQBUF.jpeg" alt="Pos2 tate tsuki" height="600">
 Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
 "Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
 @
-[[2.EstanEnVerde2():Posición 3 - Tate tsuki]] 
+[[Posición 3 - Tate tsuki]] 
 {
+Simulator.ShowReminder(25; HandLeftPosition2; HandRightPosition2;"Recordatorioinstrucciones")
 2.EstanEnVerde2()
 }
 <
@@ -111,14 +114,15 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 TateTsukiManager.ShowPosition("2")
 >
 
-:: Posición 1 - Tate tsuki
+:: Posición 1 - Tate tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se moveran los indicadores al siguiente paso y se le muestra la posición 2
 <img src="https://i.imgur.com/3OZVteZ.jpeg" alt="Pos1 tate tsuki" height="600">
 Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
 "Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
 @
-[[1.EstanEnVerde1():Posición 2 - Tate tsuki]] 
+[[Posición 2 - Tate tsuki]] 
 {
+Simulator.ShowReminder2(25; HandLeftPosition1; HandRightPosition1;"Recordatorioinstrucciones")
 1.EstanEnVerde1()
 }
 <
@@ -126,7 +130,7 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 TateTsukiManager.ShowPosition("1")
 >
 
-:: Posición 5 - Tate tsuki
+:: Posición 5 - Tate tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
 Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
 <img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
@@ -135,13 +139,17 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 @
 [[Escoger técnica a practicar]] 
 {
+Simulator.ShowReminder(25; HandLeftPosition5; HandRightPosition5;"Recordatorioinstrucciones")
 5.EstanEnVerde5()
 }
 <
 5.Log()
+TateTsukiManager.DisablePositions()
+CtrlIndicadoresManos.TerminarEntrenamiento("TateTsuki")
+Simulator.OpenDialogueViewer()
 >
 
-:: Posición 4 - Tate tsuki
+:: Posición 4 - Tate tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
 Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
 <img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
@@ -150,6 +158,7 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 @
 [[Posición 5 - Tate tsuki]] 
 {
+Simulator.ShowReminder(25; HandLeftPosition4; HandRightPosition4;"Recordatorioinstrucciones")
 4.EstanEnVerde4()
 }
 <
@@ -157,7 +166,7 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 TateTsukiManager.ShowPosition("4")
 >
 
-:: 2.EstanEnVerde2():Posición 3 - Tate tsuki
+:: Posición 3 - Tate tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
 Cuando se logre se le felicita y lo devuelve al menú inical para que aprenda una nueva técnica.
 <img src="https://i.imgur.com/1yddrT1.jpeg" alt="Pos3 tate tsuki" height="600">
@@ -166,6 +175,7 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 @
 [[Posición 4 - Tate tsuki]] 
 {
+Simulator.ShowReminder(25; HandLeftPosition3; HandRightPosition3;"Recordatorioinstrucciones")
 3.EstanEnVerde3()
 }
 <
@@ -223,7 +233,9 @@ Se reproduce el vídeo de nuevo.
 [[Elegir si repetir video Tate Suki o continuar con la práctica]]
 {}
 <
-
+Simulator.CloseDialogueViewer()
+TateTsukiGIFManager.PlayGIF();
+Simulator.Wait(8)
 >
 
 :: Empezar la práctica Tate tsuki
@@ -235,6 +247,10 @@ Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Est
 [[Posición 1 - Tate tsuki]]
 {}
 <
+Simulator.CloseDialogueViewer()
+Simulator.Play("Iniciodeentrenamiento")
+ImageController.ShowImage("CloseFist"; 5)
+Simulator.Play("CloseFistReminder")
 CtrlIndicadoresManos.EmpezarEntrenamiento("TateTsuki")
 TateTsukiManager.ShowPosition("0")
 >

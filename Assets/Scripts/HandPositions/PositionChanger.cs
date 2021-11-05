@@ -41,9 +41,17 @@ public class PositionChanger : MonoBehaviour
     {
         Debug.Log($"llegue ShowPosition {position}");
         int positionInt = int.Parse(position);
-        if(currentPosition != -1)
+
+        if (currentPosition != -1)
             positions[currentPosition].ChangeActive(false);
+
         positions[positionInt].ChangeActive(true);
         currentPosition = positionInt;
+    }
+
+    public void DisablePositions()
+    {
+        foreach (Position position in positions)
+            position.ChangeActive(false);
     }
 }

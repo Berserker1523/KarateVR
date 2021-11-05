@@ -14,9 +14,16 @@ public class SimulatorController : MonoBehaviour
 {
     public DialogueViewer dialogueViewer;
 
-    public void ShowReminder(object countdown, object activeObject)
+    public void ShowReminder1(object countdown, object activeObject)
     {
-        GameObject.Find("Reminder").GetComponent<ReminderController>().MoveOverObject(activeObject.ToString().Trim());
+        GameObject.Find("Reminder1").GetComponent<ReminderController>().MoveOverObject(activeObject.ToString().Trim());
+    }
+
+    public void ShowReminder2(object countdown, object activeObject1, object activeObject2, object audioName)
+    {
+        /*GameObject.Find("Reminder1").GetComponent<ReminderController>().MoveOverObject(activeObject1.ToString().Trim());
+        GameObject.Find("Reminder2").GetComponent<ReminderController>().MoveOverObject(activeObject2.ToString().Trim());*/
+        Play(audioName.ToString().Trim());
     }
 
     public int Wait(object time)
@@ -30,6 +37,11 @@ public class SimulatorController : MonoBehaviour
     }
 
     public int Play(object audioName)
+    {
+        return VoiceController.PlayVoice(audioName.ToString());
+    }
+
+    public int PlayWithImage(object audioName)
     {
         return VoiceController.PlayVoice(audioName.ToString());
     }
