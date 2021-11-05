@@ -26,6 +26,11 @@ Twine es una herramienta gratuita y de código abierto creada por Chris Klimas p
 #### Oculus VR: 
 Documentación de oculus VR y unity, disponible en https://docs.unity3d.com/es/530/Manual/VRDevices-Oculus.html
 
+### Recursos utilizados
+Tutorial de twine
+https://www.youtube.com/watch?v=nSQ2n6drJHU
+https://www.youtube.com/watch?v=_ee5ZgLKLbI
+
 ## Instrucciones de descarga del código para desarrollo
 
 1. Descargue o clone el repositorio
