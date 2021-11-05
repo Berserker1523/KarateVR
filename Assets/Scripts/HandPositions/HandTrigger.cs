@@ -17,7 +17,7 @@ public class HandTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"OnTriggerStay: {other.gameObject.name}");
+        //Debug.Log($"OnTriggerStay: {other.gameObject.name}");
 
         if (!other.gameObject.CompareTag(handTag.ToString()))
             return;
@@ -25,7 +25,7 @@ public class HandTrigger : MonoBehaviour
         controller = other.gameObject;
         if (controller.GetComponent<HandAnimationController>().CurrentAnimation != handAnimationTrigger)
         {
-            Debug.Log($"YELLOW2");
+            //Debug.Log($"YELLOW2");
             ChangeStatus(false);
             return;
         }
@@ -37,7 +37,7 @@ public class HandTrigger : MonoBehaviour
         }
         else
         {
-            Debug.Log($"YELLOW1");
+            //Debug.Log($"YELLOW1");
             ChangeStatus(false);
         }
 
@@ -48,7 +48,7 @@ public class HandTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag(handTag.ToString()))
         {
-            Debug.Log($"YELLOW3");
+            //Debug.Log($"YELLOW3");
             ChangeStatus(false);
         }
     }
@@ -57,7 +57,7 @@ public class HandTrigger : MonoBehaviour
     {
         if(wellDone)
         {
-            Debug.Log($"GREEN");
+            //Debug.Log($"GREEN");
             meshRenderer.material = materialGreen;
             IsWellDone = true;
         }
@@ -70,7 +70,7 @@ public class HandTrigger : MonoBehaviour
 
     private bool CheckHandRotation()
     {
-        Debug.Log($"{handTag}Rotation: {controller.transform.eulerAngles}");
+        //Debug.Log($"{handTag}Rotation: {controller.transform.eulerAngles}");
         if(handAnimationTrigger == HandAnimation.Open)
             return controller.transform.eulerAngles.x >= handTransform.eulerAngles.x - ANGLE_DIFFERENCE && controller.transform.eulerAngles.x <= handTransform.eulerAngles.x + ANGLE_DIFFERENCE;
         else if (handAnimationTrigger == HandAnimation.Fist)

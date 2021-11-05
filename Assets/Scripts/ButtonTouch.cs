@@ -22,7 +22,7 @@ public class ButtonTouch : MonoBehaviour
     void Update()
     {
         OVRInput.Update();
-        Debug.Log($"ButtonTouch {OVRInput.Get(button, OVRInput.Controller.Active)}");
+        //Debug.Log($"ButtonTouch {OVRInput.Get(button, OVRInput.Controller.Active)}");
         if(OVRInput.Get(button, OVRInput.Controller.Active))
         {
             GetComponent<Button>().onClick.Invoke();

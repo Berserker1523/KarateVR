@@ -54,8 +54,9 @@ Se reproduce el video:
 {
 }
 <
+Simulator.CloseDialogueViewer()
+UraTsukiGIFManager.PlayGIF();
 Simulator.Play("AudioinstruccionesUratsuki")
-VideoCtrl.Play("Ura tsuki")
 >
 
 :: Posición 1 - Ura tsuki[reminder]
@@ -66,25 +67,31 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 @
 [[Posición 2 - Ura tsuki]] 
 {
-Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
-Indicadores.EstanEnVerde()
+Simulator.ShowReminder2(25; HandLeftPosition1; HandRightPosition1;"Recordatorioinstrucciones")
+1.EstanEnVerde1()
 }
-<>
+<
+1.Log()
+UraTsukiManager.ShowPosition("1")
+>
 
-:: Posición 2 - Ura tsuki
+:: Posición 2 - Ura tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 1 a la 2. Una vez logrado, se le permite pasar a la posición 3. De lo contrario se repite la posición 2
 <img src="https://i.imgur.com/uxB6jpj.jpeg" alt="Pos2 ura tsuki" height="600">
 Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
 "Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
 @
-[[Posición 3-Ura tsuki]]
+[[Posición 3 -Ura tsuki]]
 {
-Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
-Indicadores.EstanEnVerde()
+Simulator.ShowReminder2(25; HandLeftPosition2; HandRightPosition2;"Recordatorioinstrucciones")
+2.EstanEnVerde2()
 }
-<>
+<
+2.Log()
+UraTsukiManager.ShowPosition("2")
+>
 
-:: Posición 3-Ura tsuki
+:: Posición 5 - Ura tsuki[reminder]
 Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
 Cuando se logre se le devuelve al menú inical para que aprenda una nueva técnica.
 <img src="https://i.imgur.com/lGgbAkD.jpeg" alt="Pos3 ura tsuki" height="600">
@@ -93,10 +100,49 @@ Si es usuario no ha logrado posicionar las manos de manera correcta después de 
 @
 [[Escoger técnica a practicar]] 
 {
-Simulator.ShowReminder(25; Indicadores;"Recordatorioinstrucciones")
-Indicadores.EstanEnVerde()
+Simulator.ShowReminder2(25; HandLeftPosition5; HandRightPosition5;"Recordatorioinstrucciones")
+5.EstanEnVerde5()
 }
-<>
+<
+5.Log()
+UraTsukiManager.DisablePositions()
+CtrlIndicadoresManos.TerminarEntrenamiento("UraTsuki")
+Simulator.OpenDialogueViewer()
+>
+
+:: Posición 4 - Ura tsuki[reminder]
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/lGgbAkD.jpeg" alt="Pos3 ura tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[Posición 5 - Ura tsuki]] 
+{
+Simulator.ShowReminder2(25; HandLeftPosition4; HandRightPosition4;"Recordatorioinstrucciones")
+4.EstanEnVerde4()
+}
+<
+4.Log()
+UraTsukiManager.ShowPosition("4")
+>
+
+:: Posición 3 - Ura tsuki[reminder]
+Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 2 a la 3. Una vez logrado, se le muestra cómo se debe pasar desde la posición 1 hasta la 3.
+Cuando se logre se le devuelve al menú inical para que aprenda una nueva técnica.
+<img src="https://i.imgur.com/lGgbAkD.jpeg" alt="Pos3 ura tsuki" height="600">
+Si es usuario no ha logrado posicionar las manos de manera correcta después de 25 segundos, se reproducirá el audio recordatorio:
+"Recuerda que debes poner tus manos en la posición y rotación correcta, como lo muestran los indicadores. Para pasar a la siguiente posición, ambos indicadores deben estár en verde"
+@
+[[Posición 4 - Ura tsuki]] 
+{
+Simulator.ShowReminder2(25; HandLeftPosition3; HandRightPosition3;"Recordatorioinstrucciones")
+3.EstanEnVerde3()
+}
+<
+3.Log()
+UraTsukiManager.ShowPosition("3")
+>
 
 :: Posición 2 - Tate tsuki[reminder]
 Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Esto se hará por medio de unos indicadores visuales que le muestren al usuario donde colocar la mano y en que rotación. Cuando el usuario haya puesto las manos correctamente en las posiciones indicadas, se le muestra cómo debe pasarlas de la posición 1 a la 2. Una vez logrado, se le permite pasar a la posición 3
@@ -191,7 +237,9 @@ Recuerda que no es necesario que recuerdes de memoria todo lo que dice el video 
 [[Ver el vídeo de nuevo Ura tsuki]]
 [[Empezar la práctica Ura tsuki]]
 {}
-<>
+<
+Simulator.OpenDialogueViewer()
+>
 
 :: Ver el vídeo de nuevo Ura tsuki
 Se reproduce el vídeo de nuevo.
@@ -199,7 +247,9 @@ Se reproduce el vídeo de nuevo.
 [[Elegir si repetir video Ura tsuki o continuar con la práctica]]
 {}
 <
-VideoCtrl.Play("Ura tsuki")
+Simulator.CloseDialogueViewer()
+UraTsukiGIFManager.PlayGIF();
+Simulator.Wait(8)
 >
 
 :: Empezar la práctica Ura tsuki
@@ -211,8 +261,12 @@ Se le muestra al usuario en dónde debe posicionar las manos en primer lugar.Est
 [[Posición 1 - Ura tsuki]]
 {}
 <
-Simulador.Play("Iniciodeentrenamiento")
-CtrlIndicadoresManos.EmpezarEntrenamiento("Ura tsuki")
+Simulator.CloseDialogueViewer()
+Simulator.Play("Iniciodeentrenamiento")
+ImageController.ShowImage("CloseFist"; 5)
+Simulator.Play("CloseFistReminder")
+CtrlIndicadoresManos.EmpezarEntrenamiento("UraTsuki")
+UraTsukiManager.ShowPosition("0")
 >
 
 :: Elegir si repetir video Tate Suki o continuar con la práctica[dialogue]
